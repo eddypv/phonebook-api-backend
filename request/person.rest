@@ -1,0 +1,24 @@
+@URL =localhost:3001/api
+@PROTOCOL = http
+
+### GET /persons
+GET {{PROTOCOL}}://{{URL}}/persons
+
+### GET /persons/info
+GET {{PROTOCOL}}://{{URL}}/persons/info
+
+### GET /persons/:id
+GET {{PROTOCOL}}://{{URL}}/persons/5
+
+### DELETE /persons/:id
+DELETE  {{PROTOCOL}}://{{URL}}/persons/5
+
+### POST /persons
+POST   {{PROTOCOL}}://{{URL}}/persons
+Content-Type: application/json
+
+{
+    "name":"Mario Ludi",
+    "number":"4554"
+
+}
