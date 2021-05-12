@@ -3,8 +3,12 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const app = express()
+
 app.use(cors())
 app.use(json())
+// files statics
+app.use(express.static('build'))
+
 morgan.token('Body', (req, res) => {
   const body = req.body
   if (Object.keys(body).length > 0) { return JSON.stringify(body) } else { return '' }
