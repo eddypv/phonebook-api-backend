@@ -4,9 +4,8 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-const {errorHandler,notFoundHandler} = require('./errors')
+const { errorHandler } = require('./errors')
 const app = express()
-
 app.use(cors())
 app.use(json())
 // files statics
@@ -19,20 +18,20 @@ morgan.token('Body', (req, res) => {
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :Body'))
 
 app.get('/api/persons/info', (request, response) => {
-  
-    Person.find({})
+
+  Person.find({})
     .then(persons => {
       const info = `<p>Phonebook has info for ${persons.length} persons </p> <p>${new Date()}</p>`
       response.send(info)
     })
-  
+
 })
 app.get('/api/persons', (request, response) => {
   Person.find({})
     .then(persons => {
       response.json(persons)
     })
-  
+
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -41,44 +40,44 @@ app.get('/api/persons/:id', (request, response, next) => {
     .then(person => {
       if(person)
         response.json(person)
-      else 
+      else
         response.status(404).end()
     })
-    .catch(error =>{ next(error) }) 
+    .catch(error => { next(error) })
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   const newPerson = request.body
   console.log(newPerson)
-  Person.findByIdAndUpdate(id, newPerson, { new:true})
+  Person.findByIdAndUpdate(id, newPerson, { new:true })
     .then(person => {
       if(person)
         response.json(person)
-      else 
+      else
         response.status(404).end()
     })
-    .catch(error =>{ next(error) }) 
+    .catch(error => { next(error) })
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person.findByIdAndDelete(id)
-    .then(()=>{
+    .then(() => {
       response.status(204).end()
     })
-    .catch(error =>{ next(error) }) 
+    .catch(error => { next(error) })
 })
 
 app.post('/api/persons', (request, response, next) => {
-  const newPerson = request.body    
-    const person = new Person({...newPerson})
-    person.save()
-      .then(savedPerson=>{
-        response.status(201).json(savedPerson)
-      })
-      .catch(error => { next(error)})
-    
+  const newPerson = request.body
+  const person = new Person({ ...newPerson })
+  person.save()
+    .then(savedPerson => {
+      response.status(201).json(savedPerson)
+    })
+    .catch(error => { next(error)})
+
 })
 
 app.use(errorHandler)
