@@ -8,10 +8,10 @@ GET {{PROTOCOL}}://{{URL}}/persons
 GET {{PROTOCOL}}://{{URL}}/persons/info
 
 ### GET /persons/:id
-GET {{PROTOCOL}}://{{URL}}/persons/5
+GET {{PROTOCOL}}://{{URL}}/persons/609dbc8be7ad90269466050b
 
 ### DELETE /persons/:id
-DELETE  {{PROTOCOL}}://{{URL}}/persons/5
+DELETE  {{PROTOCOL}}://{{URL}}/persons/609dbf2d3f534a31340792c8
 
 ### POST /persons
 POST   {{PROTOCOL}}://{{URL}}/persons
@@ -20,5 +20,15 @@ Content-Type: application/json
 {
     "name":"Mario Ludi",
     "number":"4554"
+
+}
+
+### PUT /persons/:id
+PUT   {{PROTOCOL}}://{{URL}}/persons/609dc887fc03151d28bce865
+Content-Type: application/json
+
+{
+    "name":"Mario Ludi 2",
+    "number":"4554222"
 
 }
