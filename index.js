@@ -70,29 +70,15 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch(error =>{ next(error) }) 
 })
 
-app.post('/api/persons', (request, response) => {
-  const newPerson = request.body
-  let messageError = ''
-  if (typeof newPerson.name === 'undefined' || typeof newPerson.number === 'undefined'){ 
-    messageError = 'The name or number is missing' 
-  } else if (newPerson.name.trim() === ''){ 
-    messageError = 'name is required' 
-  } else if (newPerson.number.trim() === ''){ 
-      messageError = 'number is required' } 
-    else {
-    
-  }
-
-  if (messageError === '') {
+app.post('/api/persons', (request, response, next) => {
+  const newPerson = request.body    
     const person = new Person({...newPerson})
     person.save()
       .then(savedPerson=>{
         response.status(201).json(savedPerson)
       })
+      .catch(error => { next(error)})
     
-  } else { 
-    response.status(400).json({ error: messageError }) 
-  }
 })
 
 app.use(errorHandler)

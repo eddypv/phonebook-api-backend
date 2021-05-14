@@ -18,8 +18,8 @@ POST   {{PROTOCOL}}://{{URL}}/persons
 Content-Type: application/json
 
 {
-    "name":"Mario Ludi",
-    "number":"4554"
+    "name":"Eddy Perez",
+    "number":"122878787"
 
 }
 
@@ -28,7 +28,7 @@ PUT   {{PROTOCOL}}://{{URL}}/persons/609dc887fc03151d28bce865
 Content-Type: application/json
 
 {
-    "name":"Mario Ludi 2",
+    "name":"eddy",
     "number":"4554222"
 
 }
